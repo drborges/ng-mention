@@ -1,0 +1,33 @@
+{
+  "name": "ng-mention",
+  "version": "0.0.0",
+  "authors": [
+    "drborges <drborges.cic@gmail.com>"
+  ],
+  "description": "AngularJS directive that implements a 'mention' mechanism similar to the twitter's (@username)",
+  "main": "lib/ng-mention.js",
+  "keywords": [
+    "angularjs",
+    "ng",
+    "mention",
+    "twitter"
+  ],
+  "license": "MIT",
+  "homepage": "http://drborges.github.io/ng-mention",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angularjs": "*",
+    "mocha": "~1.17.1",
+    "sinon": "~1.8.2",
+    "chai": "~1.9.0",
+    "angular-mocks": "~1.2.13",
+    "requirejs": "~2.1.11"
+  }
+}
