@@ -5,21 +5,26 @@
 require.config({
   baseUrl: '../',
   paths: {
+    'angular': 'vendor/angular/angular',
     'angular-mocks': 'vendor/angular-mocks/angular-mocks',
+    'ng-mention-spec': 'spec/ng-mention-spec',
+    'ng-mention': 'lib/ng-mention'
   },
   shim: {
-    'angular-mocks': ['vendor/angular/angular'],
-    'spec/ng-mention-spec': ['angular-mocks']
+    'angular-mocks': ['angular'],
+    'ng-mention': ['angular'],
+    'ng-mention-spec': ['angular-mocks', 'ng-mention']
   },
   urlArgs: 'bust=' + (new Date()).getTime()
 });
+
 
 require(['vendor/chai/chai', 'vendor/mocha/mocha'], function (chai) {
 
   expect = chai.expect;
   mocha.setup('bdd');
 
-  require(['spec/ng-mention-spec'], function() {
+  require(['ng-mention-spec'], function() {
     if (window.mochaPhantomJS) {
       mochaPhantomJS.run();
     } else {
