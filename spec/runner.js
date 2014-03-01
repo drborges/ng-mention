@@ -7,13 +7,13 @@ require.config({
   paths: {
     'angular': 'vendor/angular/angular',
     'angular-mocks': 'vendor/angular-mocks/angular-mocks',
-    'ng-mention-spec': 'spec/ng-mention-spec',
-    'ng-mention': 'lib/ng-mention'
+    'contenteditable.spec': 'spec/contenteditable.spec',
+    'contenteditable': 'lib/contenteditable'
   },
   shim: {
     'angular-mocks': ['angular'],
-    'ng-mention': ['angular'],
-    'ng-mention-spec': ['angular-mocks', 'ng-mention']
+    'contenteditable': ['angular'],
+    'contenteditable.spec': ['angular-mocks', 'contenteditable']
   },
   urlArgs: 'bust=' + (new Date()).getTime()
 });
@@ -24,7 +24,7 @@ require(['vendor/chai/chai', 'vendor/mocha/mocha'], function (chai) {
   expect = chai.expect;
   mocha.setup('bdd');
 
-  require(['ng-mention-spec'], function() {
+  require(['contenteditable.spec'], function() {
     if (window.mochaPhantomJS) {
       mochaPhantomJS.run();
     } else {

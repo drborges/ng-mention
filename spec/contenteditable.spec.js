@@ -1,14 +1,14 @@
 'use strict'
 
-describe("ng-mention", function () {
+describe("contenteditable", function () {
   var element, $scope;
 
-  beforeEach(module('angular.ui'));
+  beforeEach(module('drborges.contenteditable'));
 
   describe("two-way data binding", function () {
     beforeEach(inject(function ($compile, $rootScope) {
       $scope = $rootScope.$new();
-      element = $compile('<div contenteditable ng-model="posts" ng-mention>Initial data</div')($scope);
+      element = $compile('<div contenteditable ng-model="posts">Initial data</div')($scope);
     }));
 
     it ("model is initialized with element's initial content", function () {
