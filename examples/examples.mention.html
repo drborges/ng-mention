@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+  <title>ng-mention</title>
+  <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/dist/css/bootstrap.css" />
+  <script type="text/javascript" src="../vendor/angular/angular.js"></script>
+  <script type="text/javascript" src="../lib/mention.js"></script>
+  <script type="text/javascript">
+    angular.module('MyApp', ['drborges.mention'])
+      .controller('UserCtrl', function ($scope) {
+        this.searchBy = function (mention) {
+          console.log("mention:", mention);
+          $scope.users = ['diego', 'lucas', 'fernanda'].filter(function (user) {
+            return user === mention.toLowerCase();
+          });
+
+          console.log($scope.users);
+        };
+      });
+  </script>
+</head>
+<body
+  <div class="container" ng-controller="UserCtrl as userCtrl">
+    <input on-mention="userCtrl.searchBy(mention)" class="form-control" />
+    <ul ng-show="!!users.length">
+      <li ng-repeat="user in users">{{user.name}} [{{user.email}}]</li>
+    </ul>
+
+  </div>
+</body>
+</html>

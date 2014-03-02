@@ -1,33 +1,36 @@
 'use strict'
 
-describe("contenteditable", function () {
-  var element, $scope;
+define(function () {
 
-  beforeEach(module('drborges.contenteditable'));
+  describe("contenteditable", function () {
+    var element, $scope;
 
-  describe("two-way data binding", function () {
-    beforeEach(inject(function ($compile, $rootScope) {
-      $scope = $rootScope.$new();
-      element = $compile('<div contenteditable ng-model="posts">Initial data</div')($scope);
-    }));
+    beforeEach(module('drborges.contenteditable'));
 
-    it ("model is initialized with element's initial content", function () {
-      expect($scope.posts).to.equal("Initial data");
-    });
+    describe("two-way data binding", function () {
+      beforeEach(inject(function ($compile, $rootScope) {
+        $scope = $rootScope.$new();
+        element = $compile('<div contenteditable ng-model="posts">Initial data</div>')($scope);
+      }));
 
-    it("model updates are reflected on the view", function () {
-      $scope.$apply(function () {
-        $scope.posts = "model update";
+      it("model is initialized with element's initial content", function () {
+        expect($scope.posts).to.equal("Initial data");
       });
 
-      expect(element[0].innerText).to.equal("model update");
-    });
+      it("model updates are reflected on the view", function () {
+        $scope.$apply(function () {
+          $scope.posts = "model update";
+        });
 
-    it("view updates are reflected on the model", function () {
-      element[0].innerText = "view update";
-      element.triggerHandler("input");
+        expect(element[0].innerText).to.equal("model update");
+      });
 
-      expect($scope.posts).to.equal("view update");
+      it("view updates are reflected on the model", function () {
+        element[0].innerText = "view update";
+        element.trigger("input");
+
+        expect($scope.posts).to.equal("view update");
+      });
     });
   });
 });
