@@ -9,12 +9,32 @@ define(function () {
     return range;
   };
 
-  api.sendKeys = function (element, keys) {
-    keys.split('').forEach(function (key) {
-      var currentText = element.val();
-      element.val(currentText.concat(key));
+  api.on = function (element) {
+    var onApi = {};
+
+    onApi.sendKeys = function (keys) {
+      keys.split('').forEach(function (key) {
+        var currentText = element.val();
+        element.val(currentText.concat(key));
+        element.trigger('keyup');
+      });
+
+      return onApi;
+    };
+
+    onApi.text = function (text) {
+      element.val(text);
+      return onApi;
+    };
+
+    onApi.moveCursorToPosition = function (position) {
+      element[0].selectionStart = position;
+      element[0].selectionEnd = position;
       element.trigger('keyup');
-    });
+      return onApi;
+    };
+
+    return onApi;
   };
 
   // TODO: return chainable constructor objects to reduce complexity below

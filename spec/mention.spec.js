@@ -1,7 +1,7 @@
 'use strict'
 
 define(['fixtures'], function (fixtures) {
-  var sendKeys = fixtures.sendKeys;
+  var on = fixtures.on;
   var whenExtractingMentionWith = fixtures.whenExtractingMentionWith;
   var forEveryPossibleMentionDelimiter = fixtures.forEveryPossibleMentionDelimiter;
 
@@ -25,9 +25,39 @@ define(['fixtures'], function (fixtures) {
             actualMention = mention;
           };
 
-          sendKeys(element, 'text @mention');
+          on(element).sendKeys('text @mention');
 
           expect(actualMention).to.equal('mention');
+        });
+
+        it("callback is not called if mention is not detected", function () {
+          $scope.searchBy = sinon.spy();
+
+          on(element).sendKeys('text without mention');
+
+          expect($scope.searchBy).to.have.not.been.called;
+        });
+
+        xit("detects mentions as the cursor moves throughout the text", function () {
+          var actualMention;
+
+          $scope.searchBy = function (mention) {
+            actualMention = mention;
+          };
+
+          on(element)
+            .text('text @mention1 @mention2 text')
+            .moveCursorToPosition(0);
+
+          expect(actualMention).to.be.undefined;
+
+          on(element).moveCursorToPosition(14);
+
+          expect(actualMention).to.equal("mention1");
+
+          on(element).moveCursorToPosition(24);
+
+          expect(actualMention).to.equal("mention2");
         });
       });
 
