@@ -12,6 +12,7 @@ require.config({
     'mocha': 'vendor/mocha/mocha',
     'angular': 'vendor/angular/angular',
     'angular-mocks': 'vendor/angular-mocks/angular-mocks',
+    'fixtures': 'spec/fixtures',
     'contenteditable.spec': 'spec/contenteditable.spec',
     'contenteditable': 'lib/contenteditable',
     'mention.spec': 'spec/mention.spec',

@@ -1,40 +1,12 @@
 'use strict'
 
-define(function () {
+define(['fixtures'], function (fixtures) {
+  var sendKeys = fixtures.sendKeys;
+  var whenExtractingMentionWith = fixtures.whenExtractingMentionWith;
+  var forEveryPossibleMentionDelimiter = fixtures.forEveryPossibleMentionDelimiter;
 
   describe("mention", function () {
     var element, $scope;
-
-    function sendKeys(element, keys) {
-      keys.split('').forEach(function (key) {
-        var currentText = element.val();
-        element.val(currentText.concat(key));
-        element.trigger('keyup');
-      });
-    }
-
-    function whenExtractingMentionWith(controller) {
-      return {
-        from: function (text) {
-          return {
-            withCursorMovingAlongIndexRange: function (start, end) {
-              var i, range = [];
-              for (i = start; i < end; i++) {
-                range.push(i);
-              }
-              return {
-                expectMentionToBe: function (expectedValue) {
-                  range.forEach(function (cursorPosition) {
-                    var mention = controller.extractMention(text, cursorPosition);
-                    expect(mention).to.equal(expectedValue);
-                  });
-                }
-              };
-            }
-          };
-        }
-      };
-    }
 
     beforeEach(module('drborges.mention'));
 
@@ -106,8 +78,8 @@ define(function () {
         });
 
         describe("mention delimiter characters", function () {
+          forEveryPossibleMentionDelimiter(function (mentionDelimiter) {
 
-          ['.', ',', '!', '?', '@', '"', ';', ':', "'", '(', ')'].forEach(function (mentionDelimiter) {
             it("extracts mention delimited by '@' and '" + mentionDelimiter + "'", function () {
               var text = "text @mention" + mentionDelimiter + " more text";
 
